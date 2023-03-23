@@ -25,5 +25,5 @@ SELECT SUM(quantity) AS total_amount FROM bookstore;
 /* What is the avarage price? */
 SELECT AVG(price) AS avg_price FROM bookstore;
 
-/* What are the books in order from year published? */
-SELECT * FROM bookstore WHERE year > 1996 ORDER BY year;
+/* What are the books in order by price? */
+SELECT name, SUM(price) FROM bookstore GROUP BY name;
