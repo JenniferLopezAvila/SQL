@@ -1,0 +1,49 @@
+
+CREATE TABLE stars (id INTEGER PRIMARY KEY,
+    name TEXT,
+    age TEXT);
+
+INSERT INTO stars VALUES (1, 'tom', 26);
+INSERT INTO  stars VALUES (2, 'zendaya', 25);
+INSERT INTO stars VALUES (3, 'gissel', 29);
+INSERT INTO stars VALUES (4, 'ever', 37);
+INSERT INTO stars VALUES (5, 'felix', 52);
+INSERT INTO stars VALUES (6, 'mayni', 53);
+
+CREATE TABLE movies (id INTEGER PRIMARY KEY,
+    name TEXT,
+    star_id TEXT);
+    
+INSERT INTO movies VALUES (1, 'uncharted', 1);
+INSERT INTO movies VALUES (2, 'elavation', 4);
+INSERT INTO movies VALUES (3, 'power', 5);
+INSERT INTO movies VALUES (4, 'dune', 2);
+INSERT INTO movies VALUES (5, 'ultraviolet', 3);
+INSERT INTO movies VALUES (6, 'ultraviolet', 6);
+
+/* What stars were in which movies?*/
+SELECT stars.name, stars.age, movies.name, movies.star_id
+    FROM stars
+    LEFT OUTER JOIN movies
+    ON stars.id = movies.star_id;
+    
+/* Who is the oldest star?*/
+SELECT name, MAX(age) FROM stars;
+
+/*Show a table of who has worked with each other*/
+CREATE TABLE coworkers (id INTEGER PRIMARY KEY,
+    coworker1_id INTEGER,
+    coworker2_id INTEGER);
+    
+INSERT INTO coworkers VALUES (1, 1, 2);
+INSERT INTO coworkers VALUES (2, 3, 4);
+INSERT INTO coworkers VALUES (3, 5, 6);
+
+/*Now that the table is done, show the NAMES OF EACH PAIR OF COWORKERS*/
+
+SELECT a.name, b.name
+    FROM coworkers
+    JOIN stars a
+    ON a.id = coworkers.coworker1_id
+    JOIN stars b
+    ON b.id = coworkers.coworker2_id;
